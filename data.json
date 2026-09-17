@@ -1,0 +1,1302 @@
+{
+  "strategies": [
+    {
+      "id": "put-short",
+      "name": "Put Short Strategy",
+      "group": "Bullish",
+      "match": [
+        "Bullish"
+      ],
+      "risk": "Unlimited risk (as stated in the notes).",
+      "structure": "Sell an ATM or OTM put; ITM is also mentioned for traders with more directional conviction. The notes prefer OTM for beginners.",
+      "why": "Bullish market. The notes describe put selling as a way to trade a positive short-term sentiment.",
+      "execution": [
+        "Sell a put option, generally ATM or OTM.",
+        "For a beginner, the notes suggest an OTM put.",
+        "Use risk management such as a stop-loss or strategy adjustment."
+      ],
+      "adjustments": [
+        "When the sold OTM put becomes ATM as the market moves against the position, do not roll the put down according to the notes.",
+        "Sell a call with approximately the same Delta as the put; at ATM this is around 0.50.",
+        "The resulting position becomes a short straddle with near-neutral Delta.",
+        "If the market consolidates or reverses, the adjusted position can benefit."
+      ],
+      "triggers": [
+        "Underlying moves against the sold put.",
+        "Example trigger in the notes: Bank Nifty tests the sold-put strike and the put becomes ATM."
+      ],
+      "mind": [
+        "Option selling carries significant risk; the notes specifically call for stop-losses or other risk management.",
+        "The source example says the adjustment converts the position into a short straddle."
+      ],
+      "pages": "12–13",
+      "image": "put-short.png",
+      "visual": {
+        "legs": [
+          [
+            "PE",
+            "SELL",
+            -1,
+            "same",
+            "OTM PE"
+          ]
+        ],
+        "adj": [
+          [
+            "PE",
+            "SELL",
+            0,
+            "same",
+            "PE"
+          ],
+          [
+            "CE",
+            "SELL",
+            0,
+            "same",
+            "CE"
+          ]
+        ],
+        "trigger": "Sold PE becomes ATM / Delta ~0.50",
+        "adjlabel": "Add CE → short straddle"
+      }
+    },
+    {
+      "id": "call-short",
+      "name": "Call Short Strategy",
+      "group": "Bearish",
+      "match": [
+        "Bearish"
+      ],
+      "risk": "Unlimited risk (shown in the payoff example).",
+      "structure": "Sell a call option instead of buying a put.",
+      "why": "Bearish market; the notes particularly mention considering the strategy when implied volatility is a bit high and call premiums are elevated.",
+      "execution": [
+        "Sell a call option.",
+        "The notes use high IV / elevated call premium as an additional consideration."
+      ],
+      "adjustments": [
+        "If the index continues to rise, close the extra position after realizing a profit and open a new call position at a higher level.",
+        "The purpose described is to collect additional premium and raise the upper breakeven."
+      ],
+      "triggers": [
+        "Price moves upward against the short call.",
+        "The notes show an adjustment after the market moves beyond the original area."
+      ],
+      "mind": [
+        "High IV is specifically mentioned as a consideration.",
+        "Risk management is important because the payoff example shows undefined maximum loss."
+      ],
+      "pages": "14–15",
+      "image": "call-short.png",
+      "visual": {
+        "legs": [
+          [
+            "CE",
+            "SELL",
+            1,
+            "same",
+            "ATM / OTM CE"
+          ]
+        ],
+        "adj": [
+          [
+            "CE",
+            "SELL",
+            2,
+            "same",
+            "New higher CE"
+          ]
+        ],
+        "trigger": "Price keeps rising",
+        "adjlabel": "Roll short CE higher"
+      }
+    },
+    {
+      "id": "bull-put-spread",
+      "name": "Bull Put Spread",
+      "group": "Moderately Bullish",
+      "match": [
+        "Moderately Bullish"
+      ],
+      "risk": "Limited risk, limited reward.",
+      "structure": "Sell a higher-strike put (generally ATM/OTM) and buy a lower-strike put; net credit.",
+      "why": "Moderately bullish; best when the underlying is expected to stay constant or rise.",
+      "execution": [
+        "Sell the higher-strike put.",
+        "Buy the lower-strike put.",
+        "Collect the net credit."
+      ],
+      "adjustments": [
+        "Create an additional credit spread on the opposite side.",
+        "The Delta of the new credit-spread legs should match the original put-spread Delta.",
+        "Use the same strike width on both sides.",
+        "This reduces directional risk by moving total Delta toward zero.",
+        "The modified payoff resembles a short iron condor."
+      ],
+      "triggers": [
+        "Market moves against the bullish put spread / loss needs to be reduced."
+      ],
+      "mind": [
+        "The source example says the adjustment reduced maximum loss but also changes the payoff profile.",
+        "Keep the strike gap the same on both sides."
+      ],
+      "pages": "15–16",
+      "image": "bull-put-spread.png",
+      "visual": {
+        "legs": [
+          [
+            "PE",
+            "SELL",
+            0,
+            "same",
+            "Higher-strike PE"
+          ],
+          [
+            "PE",
+            "BUY",
+            -1,
+            "same",
+            "Lower-strike PE"
+          ]
+        ],
+        "adj": [
+          [
+            "PE",
+            "SELL",
+            0,
+            "same",
+            "Original short PE"
+          ],
+          [
+            "PE",
+            "BUY",
+            -1,
+            "same",
+            "Original long PE"
+          ],
+          [
+            "CE",
+            "SELL",
+            1,
+            "same",
+            "Opposing short CE"
+          ],
+          [
+            "CE",
+            "BUY",
+            2,
+            "same",
+            "Opposing long CE"
+          ]
+        ],
+        "trigger": "Position moves against bullish view",
+        "adjlabel": "Add opposite credit spread"
+      }
+    },
+    {
+      "id": "call-debit-spread",
+      "name": "Call Debit Spread (Bull Call Spread)",
+      "group": "Moderately Bullish",
+      "match": [
+        "Moderately Bullish"
+      ],
+      "risk": "Low-risk, low-reward according to the notes; net debit.",
+      "structure": "Buy a lower-strike call (usually ITM/ATM) and sell a higher-strike call (usually OTM).",
+      "why": "Moderately bullish and expecting the price to increase.",
+      "execution": [
+        "Buy the lower-strike CE.",
+        "Sell the higher-strike CE.",
+        "Pay the net debit."
+      ],
+      "adjustments": [
+        "If price moves against the expected direction, compare the CE buy and CE sell premiums.",
+        "Sell another CE with premium approximately equal to the difference between the buy and sell CE premiums, aiming for total short-leg premium equal to or greater than the long-leg premium.",
+        "If the market finds support and rebounds, square off the newly created second short position; the notes describe the original call debit spread as restored/modified."
+      ],
+      "triggers": [
+        "Price moves against the expected bullish direction.",
+        "Potential rebound/support is then considered for removing the additional short."
+      ],
+      "mind": [
+        "The source emphasizes protecting capital if the original view fails."
+      ],
+      "pages": "16–17",
+      "image": "call-debit-spread.png",
+      "visual": {
+        "legs": [
+          [
+            "CE",
+            "BUY",
+            0,
+            "same",
+            "Lower-strike CE"
+          ],
+          [
+            "CE",
+            "SELL",
+            1,
+            "same",
+            "Higher-strike CE"
+          ]
+        ],
+        "adj": [
+          [
+            "CE",
+            "BUY",
+            0,
+            "same",
+            "Original long CE"
+          ],
+          [
+            "CE",
+            "SELL",
+            1,
+            "same",
+            "Original short CE"
+          ],
+          [
+            "CE",
+            "SELL",
+            2,
+            "same",
+            "Extra short CE"
+          ]
+        ],
+        "trigger": "Price moves against bullish view",
+        "adjlabel": "Add extra short CE"
+      }
+    },
+    {
+      "id": "long-call-calendar",
+      "name": "Long Call Calendar Strategy",
+      "group": "Moderately Bullish",
+      "match": [
+        "Moderately Bullish"
+      ],
+      "risk": "Maximum risk is the net debit paid, as described.",
+      "structure": "Buy a call at a later expiry and sell a call at an earlier expiry, same strike. Delta-neutral in the notes.",
+      "why": "Moderately bullish / gradual appreciation rather than an immediate sharp move.",
+      "execution": [
+        "Buy the longer-expiry CE.",
+        "Sell the nearer-expiry CE at the same strike.",
+        "Open as a net debit."
+      ],
+      "adjustments": [
+        "Price down: adjust when Delta of an option reaches about 0.30–0.35. Book profit on the near-term short CE and create a new short CE near the current market price.",
+        "Price up: adjust when both calls are ITM and Delta is about 0.65–0.70. Close the near-term short CE with loss and sell a CE in the long expiry to create a long-term bull call spread.",
+        "When choosing the new long-expiry short strike, aim for MTM close to zero.",
+        "Do not make the adjustments more than twice, because increasing strike separation creates Delta imbalance and greater risk in a sudden reversal."
+      ],
+      "triggers": [
+        "Approach to either breakeven.",
+        "Downside: Delta ~0.30–0.35.",
+        "Upside: both calls ITM and Delta ~0.65–0.70."
+      ],
+      "mind": [
+        "Maximum profit is approximate and depends on factors including volatility of the long call.",
+        "The notes explicitly limit adjustments to two."
+      ],
+      "pages": "17–20",
+      "image": "long-call-calendar.png",
+      "visual": {
+        "legs": [
+          [
+            "CE",
+            "SELL",
+            0,
+            "near",
+            "Near-expiry CE"
+          ],
+          [
+            "CE",
+            "BUY",
+            0,
+            "far",
+            "Far-expiry CE"
+          ]
+        ],
+        "adj_down": [
+          [
+            "CE",
+            "BUY",
+            0,
+            "far",
+            "Far CE"
+          ],
+          [
+            "CE",
+            "SELL",
+            -1,
+            "near",
+            "New near CE"
+          ]
+        ],
+        "adj_up": [
+          [
+            "CE",
+            "BUY",
+            0,
+            "far",
+            "Long CE"
+          ],
+          [
+            "CE",
+            "SELL",
+            1,
+            "far",
+            "Short CE"
+          ]
+        ],
+        "trigger": "DOWN: Δ 0.30–0.35  |  UP: both ITM + Δ 0.65–0.70"
+      }
+    },
+    {
+      "id": "covered-call",
+      "name": "Covered Call Strategy",
+      "group": "Moderately Bullish",
+      "match": [
+        "Moderately Bullish"
+      ],
+      "risk": "Detailed risk/adjustment rules are not provided in the notes.",
+      "structure": "Mentioned as a strategy suitable for a moderately bullish market.",
+      "why": "Listed under moderately bullish strategies.",
+      "execution": [
+        "The notes do not provide detailed execution steps."
+      ],
+      "adjustments": [
+        "The notes do not provide detailed adjustment rules."
+      ],
+      "triggers": [
+        "Not specified in the notes."
+      ],
+      "mind": [
+        "This entry is intentionally not expanded beyond the source."
+      ],
+      "pages": "15",
+      "image": null,
+      "visual": {
+        "legs": [],
+        "adj": [],
+        "trigger": "Not specified in notes"
+      }
+    },
+    {
+      "id": "call-ratio-backspread",
+      "name": "Call Ratio Back Spread Strategy",
+      "group": "Moderately Bullish",
+      "match": [
+        "Moderately Bullish"
+      ],
+      "risk": "Detailed risk/adjustment rules are not provided in the notes.",
+      "structure": "Mentioned as a strategy suitable for a moderately bullish market.",
+      "why": "Listed under moderately bullish strategies.",
+      "execution": [
+        "The notes do not provide detailed execution steps."
+      ],
+      "adjustments": [
+        "The notes do not provide detailed adjustment rules."
+      ],
+      "triggers": [
+        "Not specified in the notes."
+      ],
+      "mind": [
+        "Source-only entry; no invented rules."
+      ],
+      "pages": "15",
+      "image": null,
+      "visual": {
+        "legs": [],
+        "adj": [],
+        "trigger": "Not specified in notes"
+      }
+    },
+    {
+      "id": "stock-repair",
+      "name": "Stock Repair Strategy",
+      "group": "Moderately Bullish",
+      "match": [
+        "Moderately Bullish"
+      ],
+      "risk": "Detailed risk/adjustment rules are not provided in the notes.",
+      "structure": "Mentioned as a strategy suitable for a moderately bullish market.",
+      "why": "Listed under moderately bullish strategies.",
+      "execution": [
+        "The notes do not provide detailed execution steps."
+      ],
+      "adjustments": [
+        "The notes do not provide detailed adjustment rules."
+      ],
+      "triggers": [
+        "Not specified in the notes."
+      ],
+      "mind": [
+        "Source-only entry; no invented rules."
+      ],
+      "pages": "15",
+      "image": null,
+      "visual": {
+        "legs": [],
+        "adj": [],
+        "trigger": "Not specified in notes"
+      }
+    },
+    {
+      "id": "bear-call-spread",
+      "name": "Bear Call Spread",
+      "group": "Moderately Bearish",
+      "match": [
+        "Moderately Bearish"
+      ],
+      "risk": "Limited risk, limited reward.",
+      "structure": "Sell a lower-strike call and buy a higher-strike call; net credit.",
+      "why": "Moderately bearish / sideways or downward market.",
+      "execution": [
+        "Sell the lower-strike CE.",
+        "Buy the higher-strike CE.",
+        "Collect the net credit.",
+        "Do not deploy if the reward-to-risk ratio is greater than 1:2, as stated in the notes."
+      ],
+      "adjustments": [
+        "If the stock crosses the breakeven, create a put spread in the opposite direction.",
+        "Keep the same width between strikes.",
+        "The notes state that this can reduce potential loss and additional transactions can reduce maximum loss while increasing possible return."
+      ],
+      "triggers": [
+        "Underlying crosses the breakeven point."
+      ],
+      "mind": [
+        "The source gives a specific reward-to-risk deployment filter: greater than 1:2 means do not deploy."
+      ],
+      "pages": "20–22",
+      "image": "bear-call-spread.png",
+      "visual": {
+        "legs": [
+          [
+            "CE",
+            "SELL",
+            0,
+            "same",
+            "Lower-strike CE"
+          ],
+          [
+            "CE",
+            "BUY",
+            1,
+            "same",
+            "Higher-strike CE"
+          ]
+        ],
+        "adj": [
+          [
+            "CE",
+            "SELL",
+            0,
+            "same",
+            "Original short CE"
+          ],
+          [
+            "CE",
+            "BUY",
+            1,
+            "same",
+            "Original long CE"
+          ],
+          [
+            "PE",
+            "SELL",
+            0,
+            "same",
+            "Opposing short PE"
+          ],
+          [
+            "PE",
+            "BUY",
+            -1,
+            "same",
+            "Opposing long PE"
+          ]
+        ],
+        "trigger": "Price crosses breakeven",
+        "adjlabel": "Add opposite put spread"
+      }
+    },
+    {
+      "id": "bear-put-spread",
+      "name": "Bear Put Spread (Put Debit Spread)",
+      "group": "Moderately Bearish",
+      "match": [
+        "Moderately Bearish"
+      ],
+      "risk": "Limited risk, limited reward; net debit.",
+      "structure": "Buy a higher-strike put (normally ITM/ATM) and sell a lower-strike put (normally OTM).",
+      "why": "Moderately bearish / expecting the underlying to be unchanged or slightly declining in the near future.",
+      "execution": [
+        "Buy the higher-strike PE.",
+        "Sell the lower-strike PE.",
+        "Pay the net debit."
+      ],
+      "adjustments": [
+        "When the difference between the long and short option Deltas falls from about 0.20 to about 0.10, the notes say it is time to intervene.",
+        "Sell another put to obtain extra credit.",
+        "Select the put so that its credit is almost equal to the initial debit, bringing overall Delta down toward about 0.20.",
+        "The sell-PE price should be almost equal to or greater than the buy-PE price to obtain some credit."
+      ],
+      "triggers": [
+        "Delta difference between long and short options shrinks to about 0.10."
+      ],
+      "mind": [
+        "The source frames this as a loss-elimination adjustment rather than a new directional entry."
+      ],
+      "pages": "22–23",
+      "image": "bear-put-spread.png",
+      "visual": {
+        "legs": [
+          [
+            "PE",
+            "BUY",
+            0,
+            "same",
+            "Higher-strike PE"
+          ],
+          [
+            "PE",
+            "SELL",
+            -1,
+            "same",
+            "Lower-strike PE"
+          ]
+        ],
+        "adj": [
+          [
+            "PE",
+            "BUY",
+            0,
+            "same",
+            "Original long PE"
+          ],
+          [
+            "PE",
+            "SELL",
+            -1,
+            "same",
+            "Original short PE"
+          ],
+          [
+            "PE",
+            "SELL",
+            1,
+            "same",
+            "Extra short PE"
+          ]
+        ],
+        "trigger": "Long-short Delta difference compresses toward 0.10",
+        "adjlabel": "Add PE short for credit"
+      }
+    },
+    {
+      "id": "long-put-calendar",
+      "name": "Long Put Calendar Spread",
+      "group": "Moderately Bearish",
+      "match": [
+        "Moderately Bearish"
+      ],
+      "risk": "Net debit; modified downside risk can increase, as noted.",
+      "structure": "Buy a longer-term PE and sell a shorter-term PE.",
+      "why": "Listed under moderately bearish strategies.",
+      "execution": [
+        "Buy the longer-expiry PE.",
+        "Sell the shorter-expiry PE.",
+        "Open as a net debit."
+      ],
+      "adjustments": [
+        "Adjustment 1 / price rising: when Delta reaches near 0.20 (or price approaches upper breakeven), book profit on the near-term short PE and open another short PE near the current price where Delta is about 0.40.",
+        "Adjustment 2 / price falling: when Delta reaches near 0.70, close the near-term short PE and short a PE in the next expiry, choosing a strike so modified MTM is as close to zero as possible."
+      ],
+      "triggers": [
+        "Price approaches upper breakeven / Delta near 0.20.",
+        "Price moves down / Delta near 0.70."
+      ],
+      "mind": [
+        "The notes warn that the modified strategy can increase maximum downside risk and reduce maximum upside risk."
+      ],
+      "pages": "23–25",
+      "image": "long-put-calendar.png",
+      "visual": {
+        "legs": [
+          [
+            "PE",
+            "SELL",
+            0,
+            "near",
+            "Near-expiry PE"
+          ],
+          [
+            "PE",
+            "BUY",
+            0,
+            "far",
+            "Far-expiry PE"
+          ]
+        ],
+        "adj_up": [
+          [
+            "PE",
+            "BUY",
+            0,
+            "far",
+            "Far PE"
+          ],
+          [
+            "PE",
+            "SELL",
+            1,
+            "near",
+            "New near PE"
+          ]
+        ],
+        "adj_down": [
+          [
+            "PE",
+            "BUY",
+            0,
+            "far",
+            "Long PE"
+          ],
+          [
+            "PE",
+            "SELL",
+            -1,
+            "next",
+            "Next-expiry short PE"
+          ]
+        ],
+        "trigger": "UP: Δ ~0.20  |  DOWN: Δ ~0.70"
+      }
+    },
+    {
+      "id": "put-ratio-backspread",
+      "name": "Put Ratio Back Spread Strategy",
+      "group": "Moderately Bearish",
+      "match": [
+        "Moderately Bearish"
+      ],
+      "risk": "Detailed risk/adjustment rules are not provided in the notes.",
+      "structure": "Mentioned as a strategy suitable for a moderately bearish market.",
+      "why": "Listed under moderately bearish strategies.",
+      "execution": [
+        "The notes do not provide detailed execution steps."
+      ],
+      "adjustments": [
+        "The notes do not provide detailed adjustment rules."
+      ],
+      "triggers": [
+        "Not specified in the notes."
+      ],
+      "mind": [
+        "Source-only entry; no invented rules."
+      ],
+      "pages": "20–21",
+      "image": null,
+      "visual": {
+        "legs": [],
+        "adj": [],
+        "trigger": "Not specified in notes"
+      }
+    },
+    {
+      "id": "married-put",
+      "name": "Married Put",
+      "group": "Moderately Bearish",
+      "match": [
+        "Moderately Bearish"
+      ],
+      "risk": "Detailed risk/adjustment rules are not provided in the notes.",
+      "structure": "Mentioned as a strategy suitable for a moderately bearish market.",
+      "why": "Listed under moderately bearish strategies.",
+      "execution": [
+        "The notes do not provide detailed execution steps."
+      ],
+      "adjustments": [
+        "The notes do not provide detailed adjustment rules."
+      ],
+      "triggers": [
+        "Not specified in the notes."
+      ],
+      "mind": [
+        "Source-only entry; no invented rules."
+      ],
+      "pages": "20–21",
+      "image": null,
+      "visual": {
+        "legs": [],
+        "adj": [],
+        "trigger": "Not specified in notes"
+      }
+    },
+    {
+      "id": "long-put-ladder",
+      "name": "Long Put Ladder Strategy",
+      "group": "Moderately Bearish",
+      "match": [
+        "Moderately Bearish"
+      ],
+      "risk": "Detailed risk/adjustment rules are not provided in the notes.",
+      "structure": "Mentioned as a strategy suitable for a moderately bearish market.",
+      "why": "Listed under moderately bearish strategies.",
+      "execution": [
+        "The notes do not provide detailed execution steps."
+      ],
+      "adjustments": [
+        "The notes do not provide detailed adjustment rules."
+      ],
+      "triggers": [
+        "Not specified in the notes."
+      ],
+      "mind": [
+        "Source-only entry; no invented rules."
+      ],
+      "pages": "20–21",
+      "image": null,
+      "visual": {
+        "legs": [],
+        "adj": [],
+        "trigger": "Not specified in notes"
+      }
+    },
+    {
+      "id": "short-strangle",
+      "name": "Short Strangle",
+      "group": "Sideways",
+      "match": [
+        "Sideways"
+      ],
+      "risk": "Unlimited risk of loss if the index moves erratically outside the range, according to the notes.",
+      "structure": "Sell an OTM CE and an OTM PE with the same expiry but different strikes.",
+      "why": "Sideways / range-bound market with call writing above and put writing below creating a range.",
+      "execution": [
+        "Sell OTM CE and OTM PE in the same expiry.",
+        "Initial short-option Delta is typically 0.20–0.30 on each side.",
+        "Overall Delta is near zero."
+      ],
+      "adjustments": [
+        "Adjust when the Delta of one short strike roughly doubles.",
+        "A conservative alternative is to adjust when a breakeven is breached.",
+        "If market rises: take some profit on the sold PE and sell a new PE at a higher strike so total Delta approaches zero.",
+        "If market keeps rising, continue moving the PE higher until the short-call strike; the position then becomes a short straddle."
+      ],
+      "triggers": [
+        "One option Delta roughly doubles.",
+        "Conservative trigger: a breakeven is breached."
+      ],
+      "mind": [
+        "The notes describe call sellers as a ceiling and put sellers as a floor in the range example.",
+        "Adjustment can progressively transform the strategy into a short straddle."
+      ],
+      "pages": "25–28",
+      "image": "short-strangle.png",
+      "visual": {
+        "legs": [
+          [
+            "CE",
+            "SELL",
+            1,
+            "same",
+            "OTM CE • Δ 0.20–0.30"
+          ],
+          [
+            "PE",
+            "SELL",
+            -1,
+            "same",
+            "OTM PE • Δ 0.20–0.30"
+          ]
+        ],
+        "adj_up": [
+          [
+            "CE",
+            "SELL",
+            1,
+            "same",
+            "Original short CE"
+          ],
+          [
+            "PE",
+            "SELL",
+            0,
+            "same",
+            "Shifted short PE"
+          ]
+        ],
+        "adj_down": [
+          [
+            "CE",
+            "SELL",
+            0,
+            "same",
+            "Shifted short CE"
+          ],
+          [
+            "PE",
+            "SELL",
+            -1,
+            "same",
+            "Original short PE"
+          ]
+        ],
+        "trigger": "One side Delta roughly doubles  |  Conservative: BEP breach",
+        "adjlabel": "Re-center opposite side"
+      }
+    },
+    {
+      "id": "short-straddle",
+      "name": "Short Straddle",
+      "group": "Sideways",
+      "match": [
+        "Sideways"
+      ],
+      "risk": "Undefined maximum loss in the payoff example.",
+      "structure": "Sell a CE and PE at the same strike and same expiry.",
+      "why": "Sideways / range-bound market.",
+      "execution": [
+        "Sell ATM CE.",
+        "Sell ATM PE.",
+        "Initial option Deltas are around 0.50 each, producing near-neutral Delta."
+      ],
+      "adjustments": [
+        "Begin adjustment when Delta of either option rises to about 0.75–0.80, or wait until a breakeven is being tested.",
+        "If market falls: book some profit from the PE and sell a CE with Delta approximately equal to 0.75.",
+        "If market rises: close the profitable PE and sell a new PE at a higher strike.",
+        "The notes say the short straddle may be modified only twice; after that, option Deltas can approach one and adjustment costs can hurt the portfolio."
+      ],
+      "triggers": [
+        "Delta of one side reaches ~0.75–0.80.",
+        "Alternative: breakeven is contested."
+      ],
+      "mind": [
+        "The notes explicitly cap modifications at two.",
+        "Extreme adjustments have a cost and can hurt the portfolio."
+      ],
+      "pages": "28–33",
+      "image": "short-straddle.png",
+      "visual": {
+        "legs": [
+          [
+            "CE",
+            "SELL",
+            0,
+            "same",
+            "ATM CE • Δ ≈ 0.50"
+          ],
+          [
+            "PE",
+            "SELL",
+            0,
+            "same",
+            "ATM PE • Δ ≈ 0.50"
+          ]
+        ],
+        "adj_up": [
+          [
+            "CE",
+            "SELL",
+            0,
+            "same",
+            "Original short CE"
+          ],
+          [
+            "PE",
+            "SELL",
+            1,
+            "same",
+            "Higher-strike PE"
+          ]
+        ],
+        "adj_down": [
+          [
+            "CE",
+            "SELL",
+            -1,
+            "same",
+            "New short CE"
+          ],
+          [
+            "PE",
+            "SELL",
+            0,
+            "same",
+            "Original short PE"
+          ]
+        ],
+        "trigger": "One side Delta reaches 0.75–0.80  |  Or BEP test",
+        "adjlabel": "Shift opposite short"
+      }
+    },
+    {
+      "id": "short-iron-condor",
+      "name": "Short Iron Condor",
+      "group": "Sideways",
+      "match": [
+        "Sideways"
+      ],
+      "risk": "Defined/hedged range strategy; payoff in notes shows limited maximum loss.",
+      "structure": "Four legs: bull put spread + bear call spread; short put strike below short call strike.",
+      "why": "Sideways / stable range. It is described as a hedged variation of the short strangle.",
+      "execution": [
+        "Create a bull put spread.",
+        "Create a bear call spread.",
+        "Keep the short put strike below the short call strike.",
+        "Overall Delta is intended to be close to zero."
+      ],
+      "adjustments": [
+        "Adjust when Delta becomes significantly imbalanced.",
+        "The notes give a practical trigger: when the Delta difference between an option combination/spread is twice, modify the iron condor.",
+        "Alternatively wait until a breakeven is reached and use steps similar to short-strangle adjustment.",
+        "Close the pair of the spread that is making profit when Delta has doubled."
+      ],
+      "triggers": [
+        "Significant Delta imbalance / Delta difference doubles.",
+        "Alternative: market reaches a breakeven."
+      ],
+      "mind": [
+        "The source emphasizes monitoring and modification as needed."
+      ],
+      "pages": "29–30",
+      "image": "short-iron-condor.png",
+      "visual": {
+        "legs": [
+          [
+            "CE",
+            "SELL",
+            1,
+            "same",
+            "Short CE"
+          ],
+          [
+            "CE",
+            "BUY",
+            2,
+            "same",
+            "Long CE hedge"
+          ],
+          [
+            "PE",
+            "SELL",
+            -1,
+            "same",
+            "Short PE"
+          ],
+          [
+            "PE",
+            "BUY",
+            -2,
+            "same",
+            "Long PE hedge"
+          ]
+        ],
+        "adj_up": [
+          [
+            "CE",
+            "SELL",
+            1,
+            "same",
+            "Short CE"
+          ],
+          [
+            "CE",
+            "BUY",
+            2,
+            "same",
+            "Long CE hedge"
+          ],
+          [
+            "PE",
+            "SELL",
+            0,
+            "same",
+            "Shifted PE"
+          ],
+          [
+            "PE",
+            "BUY",
+            -1,
+            "same",
+            "PE hedge"
+          ]
+        ],
+        "adj_down": [
+          [
+            "CE",
+            "SELL",
+            0,
+            "same",
+            "Shifted CE"
+          ],
+          [
+            "CE",
+            "BUY",
+            1,
+            "same",
+            "CE hedge"
+          ],
+          [
+            "PE",
+            "SELL",
+            -1,
+            "same",
+            "Short PE"
+          ],
+          [
+            "PE",
+            "BUY",
+            -2,
+            "same",
+            "Long PE hedge"
+          ]
+        ],
+        "trigger": "Delta imbalance / spread Delta doubles  |  Or BEP reached",
+        "adjlabel": "Close profitable spread pair → re-center"
+      }
+    },
+    {
+      "id": "short-iron-butterfly",
+      "name": "Short Iron Butterfly",
+      "group": "Sideways",
+      "match": [
+        "Sideways"
+      ],
+      "risk": "Limited by the long wings in the payoff structure; source shows a defined maximum loss.",
+      "structure": "Sell two options at the same central strike and buy two options at different outer strikes; essentially a hedged short straddle.",
+      "why": "Range-bound market with little volatility; expects the underlying to remain steady inside a range.",
+      "execution": [
+        "Sell the central CE and PE at the same strike.",
+        "Buy the outer call and put as hedges.",
+        "Aim for a Delta-neutral structure."
+      ],
+      "adjustments": [
+        "Modify as soon as Delta starts to deviate; a simpler approach is to wait until a breakeven is violated.",
+        "If market turns bullish and tests the upper breakeven, book profit on the put option pair.",
+        "The resulting structure is described as an inverted strangle.",
+        "The notes say short straddle / short iron butterfly should be modified only twice."
+      ],
+      "triggers": [
+        "Delta starts deviating materially.",
+        "Simplified trigger: breakeven is violated."
+      ],
+      "mind": [
+        "After two modifications the notes advise stopping because Deltas can approach one.",
+        "Extreme adjustments can hurt the portfolio."
+      ],
+      "pages": "31–33",
+      "image": "short-iron-butterfly.png",
+      "visual": {
+        "legs": [
+          [
+            "CE",
+            "SELL",
+            0,
+            "same",
+            "ATM short CE"
+          ],
+          [
+            "PE",
+            "SELL",
+            0,
+            "same",
+            "ATM short PE"
+          ],
+          [
+            "CE",
+            "BUY",
+            1,
+            "same",
+            "Upper hedge"
+          ],
+          [
+            "PE",
+            "BUY",
+            -1,
+            "same",
+            "Lower hedge"
+          ]
+        ],
+        "adj_up": [
+          [
+            "CE",
+            "SELL",
+            0,
+            "same",
+            "ATM short CE"
+          ],
+          [
+            "PE",
+            "SELL",
+            1,
+            "same",
+            "Shifted short PE"
+          ],
+          [
+            "CE",
+            "BUY",
+            1,
+            "same",
+            "Upper hedge"
+          ]
+        ],
+        "trigger": "Delta deviates  |  Or BEP violation",
+        "adjlabel": "Book put pair → inverted strangle"
+      }
+    },
+    {
+      "id": "double-calendar",
+      "name": "Double Calendar Spread",
+      "group": "Sideways / Volatility Expansion",
+      "match": [
+        "Sideways"
+      ],
+      "risk": "Maximum loss is confined to the net debit in the scenario described.",
+      "structure": "Combine a long-call calendar with a long-put calendar; near-term short strangle hedged by longer-term call and put options.",
+      "why": "Calm/range-bound situation where volatility is expected to rise soon. The notes say not to establish it when IV is contracting.",
+      "execution": [
+        "Buy longer-term CE and PE.",
+        "Sell nearer-term CE and PE.",
+        "The sold near-expiry options can be at the same strikes as the long options, but the notes say same strikes are not essential.",
+        "The notes also say a near-expiry option can be selected with premium similar to the sold current option."
+      ],
+      "adjustments": [
+        "Start adjustment when Delta changes suddenly; the practical trigger given is Delta difference of ±20–25.",
+        "Otherwise monitor the relevant breakeven threshold.",
+        "If price rises substantially and touches the upper breakeven and you believe the underlying will rise further, roll up the put pair for more credit.",
+        "If price decreases, make the CE pair adjustment described in the notes."
+      ],
+      "triggers": [
+        "Expected volatility rise + calm market for initial deployment.",
+        "Delta difference reaches approximately ±20–25.",
+        "Alternative: price tests a breakeven."
+      ],
+      "mind": [
+        "Calendar spreads are positive Vega in the notes and are sensitive to volatility changes.",
+        "The notes caution against deployment when IV is decreasing.",
+        "Adjustment can increase profit potential but also marginally increase maximum risk."
+      ],
+      "pages": "33–35",
+      "image": "double-calendar.png",
+      "visual": {
+        "legs": [
+          [
+            "CE",
+            "SELL",
+            0,
+            "near",
+            "Near CE"
+          ],
+          [
+            "CE",
+            "BUY",
+            0,
+            "far",
+            "Far CE"
+          ],
+          [
+            "PE",
+            "SELL",
+            0,
+            "near",
+            "Near PE"
+          ],
+          [
+            "PE",
+            "BUY",
+            0,
+            "far",
+            "Far PE"
+          ]
+        ],
+        "adj_up": [
+          [
+            "CE",
+            "SELL",
+            0,
+            "near",
+            "Near CE"
+          ],
+          [
+            "CE",
+            "BUY",
+            0,
+            "far",
+            "Far CE"
+          ],
+          [
+            "PE",
+            "SELL",
+            1,
+            "near",
+            "Rolled-up PE"
+          ],
+          [
+            "PE",
+            "BUY",
+            0,
+            "far",
+            "Far PE"
+          ]
+        ],
+        "adj_down": [
+          [
+            "CE",
+            "SELL",
+            -1,
+            "near",
+            "Adjusted CE"
+          ],
+          [
+            "CE",
+            "BUY",
+            0,
+            "far",
+            "Far CE"
+          ],
+          [
+            "PE",
+            "SELL",
+            0,
+            "near",
+            "Near PE"
+          ],
+          [
+            "PE",
+            "BUY",
+            0,
+            "far",
+            "Far PE"
+          ]
+        ],
+        "trigger": "Delta difference ±20–25  |  Or BEP test",
+        "adjlabel": "UP → roll put pair  |  DOWN → CE pair adjustment"
+      }
+    }
+  ],
+  "meta": {
+    "Bullish": {
+      "title": "Bullish market",
+      "desc": "The notes describe a positive short-term sentiment and a put-short approach."
+    },
+    "Moderately Bullish": {
+      "title": "Moderately bullish",
+      "desc": "Some optimism; price expected to stay supported or rise gradually."
+    },
+    "Sideways": {
+      "title": "Sideways / range-bound",
+      "desc": "No clear direction; price expected to oscillate within a range."
+    },
+    "Moderately Bearish": {
+      "title": "Moderately bearish",
+      "desc": "Gradual decline / sideways-to-downward environment."
+    },
+    "Bearish": {
+      "title": "Bearish market",
+      "desc": "Negative directional view; call short is the source strategy."
+    }
+  }
+}

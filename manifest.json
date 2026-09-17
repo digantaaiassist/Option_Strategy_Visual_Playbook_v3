@@ -1,0 +1,10 @@
+{
+  "name":"Option Strategy Playbook",
+  "short_name":"Option Playbook",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#f5f7fb",
+  "theme_color":"#111827",
+  "description":"Offline option strategy reference built from the uploaded notes.",
+  "icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}
